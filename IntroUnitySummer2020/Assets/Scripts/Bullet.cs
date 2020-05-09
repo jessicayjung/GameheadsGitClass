@@ -17,8 +17,16 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         //When lifeSpan seconds has passed delete me
-        //Hint: Time.deltaTime
+        currentLife += Time.deltaTime;
 
-        //Destroy(gameObject);
+        if (currentLife >= lifeSpan)
+        {
+            Destroy(gameObject);
+        }
+
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        Destroy(gameObject);
     }
 }
