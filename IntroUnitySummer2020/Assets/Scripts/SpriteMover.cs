@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpriteMover : MonoBehaviour
 {
     public float speed;
-    public float jumpForce = 1.0f;
+    public float jumpSpeed = 10.0f;
     private float currentSpeed = 0.0f;
     private BoxCollider2D pCollider;
     private Rigidbody2D rb;
@@ -32,13 +32,8 @@ public class SpriteMover : MonoBehaviour
         }
         rb.AddForce(new Vector2(currentSpeed * Time.deltaTime, 0.0f), ForceMode2D.Impulse);
 
-        if (Input.GetKeyDown(KeyCode.Space) && !IsGrounded())
+        if (Input.GetKeyUp(KeyCode.Space))
        
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
         }
-    bool IsGrounded()
-    {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(pCollider.bounds.center, pCollider.bounds.size, 0f, Vector2.down, 1f);
-        return raycastHit;
-    }
 }
